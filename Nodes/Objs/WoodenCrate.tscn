@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://cbb1xpd2owi4d"]
+
+[ext_resource type="Texture2D" uid="uid://dqgnw80nvw5dc" path="res://Assets/PNG/Default size/crateWood.png" id="1_2px3w"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_blv62"]
+size = Vector2(56, 56)
+
+[node name="WoodenCrate" type="StaticBody2D" groups=["Statics"]]
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("1_2px3w")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_blv62")

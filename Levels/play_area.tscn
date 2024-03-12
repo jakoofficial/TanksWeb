@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://daavpey3kkla2"]
+
+[ext_resource type="PackedScene" uid="uid://dprl3qsplg44y" path="res://Nodes/Characters/player.tscn" id="1_g3s11"]
+[ext_resource type="PackedScene" uid="uid://cbb1xpd2owi4d" path="res://Nodes/Objs/WoodenCrate.tscn" id="2_f4apv"]
+
+[node name="PlayArea" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_g3s11")]
+position = Vector2(328, 240)
+playerSpriteId = 3
+
+[node name="Player2" parent="." instance=ExtResource("1_g3s11")]
+position = Vector2(848, 264)
+playerId = 2
+
+[node name="Objects" type="Node" parent="."]
+
+[node name="WoodenCrate" parent="Objects" instance=ExtResource("2_f4apv")]
+position = Vector2(336, 88)

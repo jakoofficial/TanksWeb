@@ -1,0 +1,34 @@
+[gd_scene load_steps=11 format=3 uid="uid://c5n8cs6ccalc6"]
+
+[ext_resource type="Texture2D" uid="uid://c8iwhhb3h35pf" path="res://Assets/PNG/Default size/tank_green.png" id="1_nwn0s"]
+[ext_resource type="Script" path="res://Scripts/Characters/playercontroller.gd" id="1_y668n"]
+[ext_resource type="Texture2D" uid="uid://fkk1opurmlmg" path="res://Assets/PNG/Default size/tank_dark.png" id="2_8iic2"]
+[ext_resource type="Texture2D" uid="uid://r40ynjvuspcx" path="res://Assets/PNG/Default size/bulletDark3_outline.png" id="3_nirl2"]
+[ext_resource type="Texture2D" uid="uid://bnkrse1p7bnoh" path="res://Assets/PNG/Default size/tank_red.png" id="4_qsn2v"]
+[ext_resource type="Texture2D" uid="uid://7rnne1dqkkoq" path="res://Assets/PNG/Default size/tank_blue.png" id="5_50shs"]
+[ext_resource type="Texture2D" uid="uid://xexwk6wn7dt3" path="res://Assets/PNG/Default size/bulletGreen3_outline.png" id="5_dcfgu"]
+[ext_resource type="Texture2D" uid="uid://cuj0y8rq10fka" path="res://Assets/PNG/Default size/bulletRed3_outline.png" id="7_hu58g"]
+[ext_resource type="Texture2D" uid="uid://dpuaunk6mkrsi" path="res://Assets/PNG/Default size/bulletBlue3_outline.png" id="9_ttl3v"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5ebyq"]
+size = Vector2(48, 56)
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_y668n")
+playerId = 4
+speed = 200.0
+playerSprites = [[ExtResource("2_8iic2"), ExtResource("3_nirl2")], [ExtResource("1_nwn0s"), ExtResource("5_dcfgu")], [ExtResource("4_qsn2v"), ExtResource("7_hu58g")], [ExtResource("5_50shs"), ExtResource("9_ttl3v")]]
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = -3.14159
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("1_nwn0s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_5ebyq")
+
+[node name="Cannon" type="Marker2D" parent="."]
+position = Vector2(0, -40)
+scale = Vector2(2, 2)
