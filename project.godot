@@ -25,6 +25,12 @@ window/size/viewport_width=1280
 window/size/viewport_height=720
 window/size/resizable=false
 
+[importer_defaults]
+
+animation_library={
+"animation/fps": 30.0
+}
+
 [input]
 
 ui_end={

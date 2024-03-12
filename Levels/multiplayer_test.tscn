@@ -26,6 +26,11 @@ grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(150, 0)
 
+[node name="NameBox" type="TextEdit" parent="GuiMenu/VBoxContainer" groups=["test"]]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+placeholder_text = "Name"
+
 [node name="IPAddress" type="TextEdit" parent="GuiMenu/VBoxContainer"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
@@ -40,6 +45,8 @@ text = "Host"
 layout_mode = 2
 theme = ExtResource("4_gjn74")
 text = "Join"
+
+[node name="Node2D" type="Node2D" parent="."]
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://Nodes/Characters/player.tscn")
