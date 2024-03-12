@@ -1,23 +1,44 @@
-[gd_scene load_steps=4 format=3 uid="uid://cs3f3ul8v0pmo"]
+[gd_scene load_steps=5 format=3 uid="uid://cs3f3ul8v0pmo"]
 
 [ext_resource type="Script" path="res://Scripts/Multiplayer/Multiplayer_test.gd" id="1_0mpu4"]
 [ext_resource type="PackedScene" uid="uid://daavpey3kkla2" path="res://Levels/play_area.tscn" id="2_1658n"]
 [ext_resource type="PackedScene" uid="uid://dprl3qsplg44y" path="res://Nodes/Characters/player.tscn" id="3_jv6xk"]
+[ext_resource type="Theme" uid="uid://dhgf045j6msm6" path="res://Assets/Themes/Menus.tres" id="4_gjn74"]
 
 [node name="Multiplayer_test" type="Node2D"]
 script = ExtResource("1_0mpu4")
 playArea = ExtResource("2_1658n")
 player_scene = ExtResource("3_jv6xk")
 
-[node name="Host" type="Button" parent="."]
-offset_right = 8.0
-offset_bottom = 8.0
+[node name="GuiMenu" type="Node2D" parent="."]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GuiMenu"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 490.0
+offset_top = 360.0
+offset_right = 790.0
+offset_bottom = 464.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(150, 0)
+
+[node name="IPAddress" type="TextEdit" parent="GuiMenu/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+placeholder_text = "IP Goes here"
+
+[node name="Host" type="Button" parent="GuiMenu/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("4_gjn74")
 text = "Host"
 
-[node name="Join" type="Button" parent="."]
-offset_top = 40.0
-offset_right = 38.0
-offset_bottom = 71.0
+[node name="Join" type="Button" parent="GuiMenu/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("4_gjn74")
 text = "Join"
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
@@ -27,5 +48,5 @@ spawn_path = NodePath("../Player_Spawn")
 [node name="Player_Spawn" type="Node2D" parent="."]
 position = Vector2(208, 248)
 
-[connection signal="pressed" from="Host" to="." method="_on_host_pressed"]
-[connection signal="pressed" from="Join" to="." method="_on_join_pressed"]
+[connection signal="pressed" from="GuiMenu/VBoxContainer/Host" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="GuiMenu/VBoxContainer/Join" to="." method="_on_join_pressed"]
