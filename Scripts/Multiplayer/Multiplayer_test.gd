@@ -37,8 +37,11 @@ func _add_player(id = 1):
 func set_player_name(player):
 	player.playerName = nameBox.text
 #
-func SetPlayerColor(tankColorId):
-	playerColorId = tankColorId
+func SetPlayerColor(ColorId):
+	for i in $GuiMenu/TankChoice/HBoxContainer.get_children():
+		if i.tankColorId != ColorId:
+			i.button_pressed = false
+	playerColorId = ColorId
 
 func _on_join_pressed():
 	# var error = peer.create_client(ipArea.text, PORT)
