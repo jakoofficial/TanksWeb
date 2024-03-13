@@ -1,5 +1,8 @@
 extends CharacterBody2D
 
+signal player_entered
+signal set_player_color
+
 @export var playerId: int = 1
 @export var playerSpriteId: int = 1
 @export var speed: float = 150
@@ -7,21 +10,29 @@ extends CharacterBody2D
 @export var bulletTimer: float = 1
 @export var playerSprites = []
 @export var playerName: String = "Test"
-signal player_entered
+@onready var spr = $"Sprite2D"
+
 const bulletPre = preload ("res://Nodes/Characters/bullet.tscn")
-@onready var spr = $Sprite2D
 var canShoot: bool = true
+var playerTexture: Texture
 
 func _enter_tree():
 	set_multiplayer_authority(name.to_int())
 	if is_multiplayer_authority():
 		playerName = get_tree().get_first_node_in_group("test").text
+		playerSpriteId = get_tree().current_scene.playerColorId
+		print(playerSpriteId)
+		#changeColor.rpc(name.to_int(), playerSpriteId)
+		#playerTexture = playerSprites[playerSpriteId-1][0]
+		#print($"Sprite2D")
 		#player_entered.emit(self)
 
 func _ready():
-	spr.texture = playerSprites[playerSpriteId-1][0]
+	#spr.texture = playerSprites[playerSpriteId-1][0]
+	changeColor(name.to_int(), playerSpriteId)
 
 func _process(delta):
+	#spr.texture = playerTexture
 	$Node2D/Label.text = playerName
 	$Node2D.global_rotation = 0
 	$Node2D.global_position.y = global_position.y - 48
@@ -62,5 +73,13 @@ func spawnBullet(pos:Vector2, forward:Transform2D):
 	var main = get_tree().current_scene
 	var bullet = bulletPre.instantiate()
 	var bulletSpr = bullet.get_child(0)
+	bulletSpr.texture = playerSprites[playerSpriteId-1][1]
 	main.add_child(bullet)
 	bullet.transform = forward
+
+#@rpc("call_local")
+func changeColor(clientId, colorId):
+	await get_tree().create_timer(0.05).timeout
+	#var child = get_tree().current_scene.find_child(str(clientId))
+	#var child = get_tree().current_scene.find_child("GuiMenu")
+	$Sprite2D.texture = playerSprites[playerSpriteId-1][0]

@@ -1,9 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://cs3f3ul8v0pmo"]
+[gd_scene load_steps=11 format=3 uid="uid://cs3f3ul8v0pmo"]
 
 [ext_resource type="Script" path="res://Scripts/Multiplayer/Multiplayer_test.gd" id="1_0mpu4"]
 [ext_resource type="PackedScene" uid="uid://daavpey3kkla2" path="res://Levels/play_area.tscn" id="2_1658n"]
 [ext_resource type="PackedScene" uid="uid://dprl3qsplg44y" path="res://Nodes/Characters/player.tscn" id="3_jv6xk"]
 [ext_resource type="Theme" uid="uid://dhgf045j6msm6" path="res://Assets/Themes/Menus.tres" id="4_gjn74"]
+[ext_resource type="Texture2D" uid="uid://fkk1opurmlmg" path="res://Assets/PNG/Default size/tank_dark.png" id="5_h2kqw"]
+[ext_resource type="PackedScene" uid="uid://cvg24t28i1ud1" path="res://Nodes/UI/TankButton.tscn" id="5_l02yh"]
+[ext_resource type="Texture2D" uid="uid://c8iwhhb3h35pf" path="res://Assets/PNG/Default size/tank_green.png" id="6_x2pav"]
+[ext_resource type="Texture2D" uid="uid://bnkrse1p7bnoh" path="res://Assets/PNG/Default size/tank_red.png" id="7_cjrs3"]
+[ext_resource type="Texture2D" uid="uid://7rnne1dqkkoq" path="res://Assets/PNG/Default size/tank_blue.png" id="8_op728"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_tbmfa"]
+font_size = 29
 
 [node name="Multiplayer_test" type="Node2D"]
 script = ExtResource("1_0mpu4")
@@ -46,6 +54,42 @@ layout_mode = 2
 theme = ExtResource("4_gjn74")
 text = "Join"
 
+[node name="TankChoice" type="VBoxContainer" parent="GuiMenu"]
+offset_left = 390.0
+offset_top = 136.0
+offset_right = 890.0
+offset_bottom = 286.0
+pivot_offset = Vector2(250, 50)
+
+[node name="Label" type="Label" parent="GuiMenu/TankChoice"]
+layout_mode = 2
+text = "Choose a tank"
+label_settings = SubResource("LabelSettings_tbmfa")
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GuiMenu/TankChoice"]
+layout_mode = 2
+alignment = 1
+
+[node name="Black" parent="GuiMenu/TankChoice/HBoxContainer" instance=ExtResource("5_l02yh")]
+layout_mode = 2
+tankIcon = ExtResource("5_h2kqw")
+
+[node name="Green" parent="GuiMenu/TankChoice/HBoxContainer" instance=ExtResource("5_l02yh")]
+layout_mode = 2
+tankColorId = 2
+tankIcon = ExtResource("6_x2pav")
+
+[node name="Red" parent="GuiMenu/TankChoice/HBoxContainer" instance=ExtResource("5_l02yh")]
+layout_mode = 2
+tankColorId = 3
+tankIcon = ExtResource("7_cjrs3")
+
+[node name="Blue" parent="GuiMenu/TankChoice/HBoxContainer" instance=ExtResource("5_l02yh")]
+layout_mode = 2
+tankColorId = 4
+tankIcon = ExtResource("8_op728")
+
 [node name="Node2D" type="Node2D" parent="."]
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
@@ -57,3 +101,7 @@ position = Vector2(208, 248)
 
 [connection signal="pressed" from="GuiMenu/VBoxContainer/Host" to="." method="_on_host_pressed"]
 [connection signal="pressed" from="GuiMenu/VBoxContainer/Join" to="." method="_on_join_pressed"]
+[connection signal="pressed" from="GuiMenu/TankChoice/HBoxContainer/Black" to="GuiMenu/TankChoice/HBoxContainer/Black" method="_on_pressed"]
+[connection signal="pressed" from="GuiMenu/TankChoice/HBoxContainer/Green" to="GuiMenu/TankChoice/HBoxContainer/Green" method="_on_pressed"]
+[connection signal="pressed" from="GuiMenu/TankChoice/HBoxContainer/Red" to="GuiMenu/TankChoice/HBoxContainer/Red" method="_on_pressed"]
+[connection signal="pressed" from="GuiMenu/TankChoice/HBoxContainer/Blue" to="GuiMenu/TankChoice/HBoxContainer/Blue" method="_on_pressed"]

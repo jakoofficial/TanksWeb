@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cvg24t28i1ud1"]
+
+[ext_resource type="Texture2D" uid="uid://fkk1opurmlmg" path="res://Assets/PNG/Default size/tank_dark.png" id="1_vs8ft"]
+[ext_resource type="Script" path="res://Scripts/Multiplayer/TankButton.gd" id="2_ok0qw"]
+
+[node name="Black" type="Button"]
+custom_minimum_size = Vector2(100, 100)
+icon = ExtResource("1_vs8ft")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("2_ok0qw")
