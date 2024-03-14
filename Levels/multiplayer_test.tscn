@@ -1,14 +1,16 @@
-[gd_scene load_steps=11 format=3 uid="uid://cs3f3ul8v0pmo"]
+[gd_scene load_steps=13 format=3 uid="uid://cs3f3ul8v0pmo"]
 
 [ext_resource type="Script" path="res://Scripts/Multiplayer/Multiplayer_test.gd" id="1_0mpu4"]
 [ext_resource type="PackedScene" uid="uid://daavpey3kkla2" path="res://Levels/play_area.tscn" id="2_1658n"]
 [ext_resource type="PackedScene" uid="uid://dprl3qsplg44y" path="res://Nodes/Characters/player.tscn" id="3_jv6xk"]
+[ext_resource type="PackedScene" uid="uid://dn6t3powmgwaq" path="res://Levels/Map1.tscn" id="4_cgnal"]
 [ext_resource type="Theme" uid="uid://dhgf045j6msm6" path="res://Assets/Themes/Menus.tres" id="4_gjn74"]
 [ext_resource type="Texture2D" uid="uid://fkk1opurmlmg" path="res://Assets/PNG/Default size/tank_dark.png" id="5_h2kqw"]
 [ext_resource type="PackedScene" uid="uid://cvg24t28i1ud1" path="res://Nodes/UI/TankButton.tscn" id="5_l02yh"]
 [ext_resource type="Texture2D" uid="uid://c8iwhhb3h35pf" path="res://Assets/PNG/Default size/tank_green.png" id="6_x2pav"]
 [ext_resource type="Texture2D" uid="uid://bnkrse1p7bnoh" path="res://Assets/PNG/Default size/tank_red.png" id="7_cjrs3"]
 [ext_resource type="Texture2D" uid="uid://7rnne1dqkkoq" path="res://Assets/PNG/Default size/tank_blue.png" id="8_op728"]
+[ext_resource type="PackedScene" uid="uid://b1b5hf3nwwoyv" path="res://Nodes/UI/hud.tscn" id="10_lyqya"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_tbmfa"]
 font_size = 29
@@ -17,6 +19,8 @@ font_size = 29
 script = ExtResource("1_0mpu4")
 playArea = ExtResource("2_1658n")
 player_scene = ExtResource("3_jv6xk")
+
+[node name="TileMap" parent="." instance=ExtResource("4_cgnal")]
 
 [node name="GuiMenu" type="Node2D" parent="."]
 
@@ -97,7 +101,18 @@ _spawnable_scenes = PackedStringArray("res://Nodes/Characters/player.tscn")
 spawn_path = NodePath("../Player_Spawn")
 
 [node name="Player_Spawn" type="Node2D" parent="."]
-position = Vector2(208, 248)
+position = Vector2(128, 104)
+
+[node name="Hud" parent="." instance=ExtResource("10_lyqya")]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 8.0
+offset_top = 32.0
+offset_right = 8.0
+offset_bottom = 32.0
+grow_horizontal = 1
+grow_vertical = 1
 
 [connection signal="pressed" from="GuiMenu/VBoxContainer/Host" to="." method="_on_host_pressed"]
 [connection signal="pressed" from="GuiMenu/VBoxContainer/Join" to="." method="_on_join_pressed"]

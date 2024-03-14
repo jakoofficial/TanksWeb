@@ -31,6 +31,8 @@ func _add_player(id = 1):
 	player.name = str(id)
 	player.player_entered.connect(set_player_name)
 	player.playerSpriteId = playerColorId
+	if not is_multiplayer_authority():
+		print("Player %s connected and is %s" % [id, playerColorId])
 	# call_deferred("add_child", player)
 	find_child("Player_Spawn").call_deferred("add_child", player)
 
