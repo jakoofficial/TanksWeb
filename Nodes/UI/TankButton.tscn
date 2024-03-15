@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://cvg24t28i1ud1"]
+
+[ext_resource type="Texture2D" uid="uid://fkk1opurmlmg" path="res://Assets/PNG/Default size/tank_dark.png" id="1_vs8ft"]
+[ext_resource type="Script" path="res://Scripts/Multiplayer/TankButton.gd" id="2_ok0qw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n7abh"]
+bg_color = Color(1, 1, 1, 0.490196)
+
+[sub_resource type="Theme" id="Theme_8wrd7"]
+Button/styles/pressed = SubResource("StyleBoxFlat_n7abh")
+
+[node name="Black" type="Button"]
+custom_minimum_size = Vector2(100, 100)
+theme = SubResource("Theme_8wrd7")
+toggle_mode = true
+icon = ExtResource("1_vs8ft")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("2_ok0qw")
