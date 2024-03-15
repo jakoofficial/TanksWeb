@@ -26,6 +26,7 @@ func _enter_tree():
 	if is_multiplayer_authority():
 		playerName = get_tree().get_first_node_in_group("test").text
 		playerSpriteId = get_tree().current_scene.playerColorId
+		$Camera2D.enabled = true
 		if spawnPos != Vector2.ZERO:
 			global_position = spawnPos
 			
