@@ -33,8 +33,13 @@ func _add_player(id = 1):
 	player.playerSpriteId = playerColorId
 	if not is_multiplayer_authority():
 		print("Player %s connected and is %s" % [id, playerColorId])
-	# call_deferred("add_child", player)
-	find_child("Player_Spawn").call_deferred("add_child", player)
+		
+	var spawnArea = find_child("Spawns").get_child(0)
+	spawnArea.progress_ratio = randf()
+	player.spawnPos = spawnArea.global_position
+	player.set_spawn.rpc(spawnArea.global_position)
+	find_child("Spawns").call_deferred("add_child", player)
+	
 
 func set_player_name(player):
 	player.playerName = nameBox.text

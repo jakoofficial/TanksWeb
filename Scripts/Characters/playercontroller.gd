@@ -10,18 +10,32 @@ signal set_player_color
 @export var bulletTimer: float = 1
 @export var playerSprites = []
 @export var playerName: String = "Test"
+@export var canControl: bool = true
+@export var spawnPos: Vector2
+
 @onready var spr = $"Sprite2D"
 
 const bulletPre = preload ("res://Nodes/Characters/bullet.tscn")
 var canShoot: bool = true
 var playerTexture: Texture
+var isHit: bool = false
+
 
 func _enter_tree():
 	set_multiplayer_authority(name.to_int())
 	if is_multiplayer_authority():
 		playerName = get_tree().get_first_node_in_group("test").text
 		playerSpriteId = get_tree().current_scene.playerColorId
-		
+		if spawnPos != Vector2.ZERO:
+			global_position = spawnPos
+			
+		var spawnArea = get_tree().current_scene.find_child("Spawns").get_child(0)
+		spawnArea.progress_ratio = randf()
+		global_position = spawnArea.global_position
+
+@rpc()
+func set_spawn(pos: Vector2):
+	global_position = pos
 
 func _process(delta):
 	#spr.texture = playerTexture
@@ -35,10 +49,15 @@ func _process(delta):
 
 func _physics_process(delta):
 	velocity = Vector2.ZERO
-
 	if is_multiplayer_authority():
-		characterInput(delta)
+		if canControl:
+			characterInput(delta)
 	move_and_slide()
+
+func hit():
+	if not isHit:
+		print(str("Hit"+name))
+		isHit = true
 
 func shoot():
 	var cannon = get_node("Cannon")

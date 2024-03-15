@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://dn6t3powmgwaq"]
+[gd_scene load_steps=4 format=3 uid="uid://dn6t3powmgwaq"]
 
 [ext_resource type="TileSet" uid="uid://d2d1f3ylnbwms" path="res://Assets/Tilesheet/Ground.tres" id="1_xmwu1"]
 [ext_resource type="PackedScene" uid="uid://cbb1xpd2owi4d" path="res://Nodes/Objs/WoodenCrate.tscn" id="2_bdhpr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bsiqw"]
 
 [node name="TileMap" type="TileMap"]
 position = Vector2(-152, 56)
@@ -13,7 +15,7 @@ layer_0/tile_data = PackedInt32Array(0, 1, 0, 65536, 1, 0, 131072, 1, 0, 196608,
 layer_1/name = "Road"
 layer_1/tile_data = PackedInt32Array(458753, 131073, 0, 458754, 131073, 0, 458755, 131073, 0, 458756, 131073, 0, 65541, 65537, 0, 327685, 655361, 1610612738, 393221, 65537, 0, 458757, 327681, 0, 458758, 131073, 0, 458759, 131073, 0, 393224, 196609, 1, 458760, 65537, 1, 393225, 131073, 0, 458761, 131073, 0, 393226, 131073, 0, 327691, 65537, 0, 393227, 393217, 1, 131085, 131073, 0, 14, 589825, 3, 65550, 65537, 0, 131086, 393217, 1, -65522, 65537, 2, -131058, 65537, 2, 5, 262145, 0, -65531, 65537, 0, 1, 131073, 0, 2, 131073, 0, 3, 131073, 0, 4, 131073, 0, 0, 327681, 1, -65536, 262145, 1, 458752, 196609, 1, 524288, 65537, 0, 589824, 65537, 0, 655360, 393217, 1, 720895, 131073, 0, 458762, 131073, 0, 458763, 131073, 0, 524296, 65537, 0, 589832, 65537, 0, 655368, 65537, 0, 720904, 65537, 0, 131084, 131073, 0, 131077, 655361, 1342177282, 262155, 655361, 1879048194, 131083, 655361, 268435458, 458764, 655361, 2)
 layer_2/name = "Objects"
-layer_2/tile_data = PackedInt32Array(196617, 131072, 0, 458759, 131072, 0, 16, 131072, 0, 6, 196608, 0, 393220, 196608, 0, 393231, 196608, 0, 11, 196608, 0)
+layer_2/tile_data = PackedInt32Array(196617, 131072, 0, 16, 131072, 0, 6, 196608, 0, 393220, 196608, 0, 393231, 196608, 0, 11, 196608, 0, 393224, 131072, 0)
 
 [node name="WoodenCrate" parent="." instance=ExtResource("2_bdhpr")]
 position = Vector2(184, 200)
@@ -35,3 +37,27 @@ position = Vector2(1080, 136)
 
 [node name="WoodenCrate7" parent="." instance=ExtResource("2_bdhpr")]
 position = Vector2(440, 552)
+
+[node name="Walls" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls"]
+position = Vector2(52, 424)
+scale = Vector2(10, 65)
+shape = SubResource("RectangleShape2D_bsiqw")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Walls"]
+position = Vector2(792, -156)
+rotation = -1.57079
+scale = Vector2(10, 65)
+shape = SubResource("RectangleShape2D_bsiqw")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Walls"]
+position = Vector2(792, 764)
+rotation = -1.57079
+scale = Vector2(10, 65)
+shape = SubResource("RectangleShape2D_bsiqw")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Walls"]
+position = Vector2(1532, 328)
+scale = Vector2(10, 65)
+shape = SubResource("RectangleShape2D_bsiqw")
