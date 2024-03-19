@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cbb1xpd2owi4d" path="res://Nodes/Objs/WoodenCrate.tscn" id="2_bdhpr"]
 
 [node name="TileMap" type="TileMap"]
+z_index = -2
 position = Vector2(-152, 56)
 tile_set = ExtResource("1_xmwu1")
 rendering_quadrant_size = 64

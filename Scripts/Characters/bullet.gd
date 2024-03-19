@@ -12,8 +12,7 @@ func _on_body_entered(body:Node2D):
 	if body.is_in_group("Player"):
 		explode()
 		#body.hit()
-		if is_multiplayer_authority():
-			emit_signal("hitPlayer", self, body)
+		emit_signal("hitPlayer", self, body)
 		#body.queue_free()
 		queue_free()
 	if body.is_in_group("Statics"):

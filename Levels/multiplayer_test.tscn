@@ -33,6 +33,7 @@ player_scene = ExtResource("3_jv6xk")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Hud" parent="CanvasLayer" instance=ExtResource("10_lyqya")]
+process_mode = 3
 mouse_filter = 2
 
 [node name="GuiMenu" type="Node" parent="."]
@@ -70,6 +71,11 @@ text = "Host"
 layout_mode = 2
 theme = ExtResource("4_gjn74")
 text = "Join"
+
+[node name="ServerBtn" type="Button" parent="GuiMenu/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("4_gjn74")
+text = "Server"
 
 [node name="TankChoice" type="VBoxContainer" parent="GuiMenu"]
 offset_left = 390.0
@@ -133,6 +139,7 @@ position = Vector2(4008, 2456)
 
 [connection signal="pressed" from="GuiMenu/VBoxContainer/Host" to="." method="_on_host_pressed"]
 [connection signal="pressed" from="GuiMenu/VBoxContainer/Join" to="." method="_on_join_pressed"]
+[connection signal="pressed" from="GuiMenu/VBoxContainer/ServerBtn" to="." method="_on_server_btn_pressed"]
 [connection signal="pressed" from="GuiMenu/TankChoice/HBoxContainer/Black" to="GuiMenu/TankChoice/HBoxContainer/Black" method="_on_pressed"]
 [connection signal="pressed" from="GuiMenu/TankChoice/HBoxContainer/Green" to="GuiMenu/TankChoice/HBoxContainer/Green" method="_on_pressed"]
 [connection signal="pressed" from="GuiMenu/TankChoice/HBoxContainer/Red" to="GuiMenu/TankChoice/HBoxContainer/Red" method="_on_pressed"]

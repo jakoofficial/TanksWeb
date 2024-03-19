@@ -27,6 +27,13 @@ func _on_host_pressed():
 	connectMenu.visible = false
 	tankChoiceMenu.visible = false
 
+func _on_server_btn_pressed():
+	peer.create_server(PORT)
+	multiplayer.multiplayer_peer = peer
+	multiplayer.peer_connected.connect(_add_player)
+	connectMenu.visible = false
+	tankChoiceMenu.visible = false
+	
 func _add_player(id = 1):
 	var player = player_scene.instantiate()
 	player.name = str(id)
@@ -42,11 +49,22 @@ func _add_player(id = 1):
 	player.spawnPos = spawnArea.global_position
 	player.set_spawn.rpc(spawnArea.global_position)
 	find_child("Spawns").call_deferred("add_child", player)
-	
+
+func setRespawn(player):
+	var spawnArea = find_child("Spawns").get_child(0)
+	spawnArea.progress_ratio = randf()
+	#player.global_position = spawnArea.global_position
+	player.respawn(spawnArea.global_position)
+
 func onPlayerHit(bullet, target):
+	print("!")
 	if bullet.is_multiplayer_authority():
 		$CanvasLayer/Hud.score = $CanvasLayer/Hud.score + 1
-		print("hello Points")
+		#target.isHit = true
+		#setRespawn(target)
+		print("Target: %s is hit: %s" % [target.name, target.isHit])
+	elif target.is_multiplayer_authority():
+		setRespawn(target)
 
 func set_player_name(player):
 	player.playerName = nameBox.text
@@ -66,3 +84,4 @@ func _on_join_pressed():
 		multiplayer.multiplayer_peer = peer
 		connectMenu.visible = false
 		tankChoiceMenu.visible = false
+
