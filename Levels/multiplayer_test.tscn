@@ -45,9 +45,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -150.0
-offset_top = -63.0
+offset_top = -95.5
 offset_right = 150.0
-offset_bottom = 149.0
+offset_bottom = 197.5
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(150, 0)
@@ -77,11 +77,16 @@ layout_mode = 2
 theme = ExtResource("4_gjn74")
 text = "Server"
 
+[node name="Label" type="Label" parent="GuiMenu/VBoxContainer"]
+layout_mode = 2
+text = "Made by: Jacob Ø. Andersen"
+horizontal_alignment = 1
+
 [node name="TankChoice" type="VBoxContainer" parent="GuiMenu"]
 offset_left = 390.0
-offset_top = 136.0
+offset_top = 106.0
 offset_right = 890.0
-offset_bottom = 286.0
+offset_bottom = 256.0
 pivot_offset = Vector2(250, 50)
 
 [node name="Label" type="Label" parent="GuiMenu/TankChoice"]

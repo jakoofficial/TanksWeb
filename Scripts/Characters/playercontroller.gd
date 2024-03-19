@@ -15,6 +15,7 @@ signal playerHit
 @export var spawnPos: Vector2
 
 @onready var spr = $"Sprite2D"
+@onready var muzzleflash = $Muzzleflash
 
 const bulletPre = preload ("res://Nodes/Characters/bullet.tscn")
 const trackPre = preload("res://Nodes/Characters/tracks.tscn")
@@ -72,7 +73,6 @@ func hit(bullet, target):
 func shoot():
 	var cannon = get_node("Cannon")
 	spawnBullet.rpc(position, cannon.global_transform)
-	#bulletSpr.texture = playerSprites[playerSpriteId-1][1]
 
 func createTrack():
 	var spawner = get_node("TrackSpawner")
@@ -98,6 +98,7 @@ func characterInput(delta):
 	# velocity = dir * speed
 	if Input.is_action_pressed("p1_shoot") and canShoot:
 		shoot()
+		
 		canShoot = false
 		await get_tree().create_timer(bulletTimer).timeout
 		canShoot = true
@@ -119,3 +120,7 @@ func spawnBullet(pos:Vector2, forward:Transform2D):
 	bulletSpr.texture = playerSprites[playerSpriteId-1][1]
 	main.add_child(bullet)
 	bullet.transform = forward
+	
+	muzzleflash.visible = true
+	await get_tree().create_timer(0.1).timeout
+	muzzleflash.visible = false
