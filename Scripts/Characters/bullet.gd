@@ -1,7 +1,9 @@
 extends Area2D
 
+signal hitPlayer
+
 @export var spd : int = 10
-@onready var explosionPre = preload("res://Nodes/Effects/explosion.tscn") 
+@onready var explosionPre = preload("res://Nodes/Effects/explosion.tscn")
 
 func _physics_process(delta):
 	position += Vector2.from_angle(transform.get_rotation()-PI/2) * (spd * 10) * delta
@@ -10,6 +12,9 @@ func _on_body_entered(body:Node2D):
 	if body.is_in_group("Player"):
 		explode()
 		#body.hit()
+		if is_multiplayer_authority():
+			emit_signal("hitPlayer", self, body)
+		#body.queue_free()
 		queue_free()
 	if body.is_in_group("Statics"):
 		explode()

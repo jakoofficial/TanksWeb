@@ -19,9 +19,9 @@ font_size = 29
 [sub_resource type="Curve2D" id="Curve2D_xsl63"]
 bake_interval = 50.0
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 88, 88, 0, 0, 0, 0, 304, 216, 0, 0, 0, 0, 776, 192, 0, 0, 0, 0, 888, 104, 0, 0, 0, 0, 1024, 56, 0, 0, 0, 0, 1184, 344, 0, 0, 0, 0, 1216, 680, 0, 0, 0, 0, 72, 672, 0, 0, 0, 0, 72, 376)
+"points": PackedVector2Array(0, 0, 0, 0, 88, 88, 0, 0, 0, 0, 304, 216, 0, 0, 0, 0, 776, 192, 0, 0, 0, 0, 888, 104, 0, 0, 0, 0, 1024, 56, 0, 0, 0, 0, 1240, 320, 0, 0, 0, 0, 1728, 272, 0, 0, 0, 0, 1896, 56, 0, 0, 0, 0, 2896, 88, 0, 0, 0, 0, 3208, 336, 0, 0, 0, 0, 3448, 744, 0, 0, 0, 0, 3664, 1040, 0, 0, 0, 0, 3688, 1376, 0, 0, 0, 0, 3496, 1608, 0, 0, 0, 0, 3664, 1976, 0, 0, 0, 0, 3360, 2152, 0, 0, 0, 0, 3088, 2000, 0, 0, 0, 0, 2456, 2056, 0, 0, 0, 0, 2208, 2296, 0, 0, 0, 0, 1512, 2248, 0, 0, 0, 0, 1136, 2112, 0, 0, 0, 0, 728, 1904, 0, 0, 0, 0, 576, 2024, 0, 0, 0, 0, 520, 2256, 0, 0, 0, 0, 192, 2232, 0, 0, 0, 0, 216, 1584, 0, 0, 0, 0, 448, 1584, 0, 0, 0, 0, 496, 1264, 0, 0, 0, 0, 272, 1152, 0, 0, 0, 0, 432, 864, 0, 0, 0, 0, 864, 888, 0, 0, 0, 0, 1016, 1224, 0, 0, 0, 0, 1016, 1640, 0, 0, 0, 0, 1392, 1664, 0, 0, 0, 0, 1696, 1424, 0, 0, 0, 0, 1872, 1224, 0, 0, 0, 0, 2200, 1312, 0, 0, 0, 0, 2296, 1656, 0, 0, 0, 0, 2592, 1616, 0, 0, 0, 0, 2776, 1264, 0, 0, 0, 0, 2720, 872, 0, 0, 0, 0, 2848, 624, 0, 0, 0, 0, 2632, 424, 0, 0, 0, 0, 2392, 616, 0, 0, 0, 0, 2368, 808, 0, 0, 0, 0, 1936, 704, 0, 0, 0, 0, 1400, 792, 0, 0, 0, 0, 664, 672, 0, 0, 0, 0, 216, 744, 0, 0, 0, 0, 72, 440, 0, 0, 0, 0, 88, 88)
 }
-point_count = 9
+point_count = 51
 
 [node name="Multiplayer_test" type="Node2D"]
 script = ExtResource("1_0mpu4")
@@ -116,21 +116,20 @@ spawn_path = NodePath("../Spawns")
 [node name="Player_Spawn" type="Node2D" parent="."]
 position = Vector2(128, 104)
 
-[node name="Player" parent="." instance=ExtResource("3_jv6xk")]
-position = Vector2(592, 80)
-canControl = false
-
 [node name="Spawns" type="Path2D" parent="."]
 curve = SubResource("Curve2D_xsl63")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Spawns"]
-position = Vector2(1104.27, 200.485)
-rotation = 1.0637
+position = Vector2(1128.66, 183.914)
+rotation = 0.885067
 progress = 1175.63
 
 [node name="Sprite2D" type="Sprite2D" parent="Spawns/PathFollow2D"]
 scale = Vector2(0.313793, 0.346162)
 texture = ExtResource("12_55dh1")
+
+[node name="Node2D2" type="Node2D" parent="."]
+position = Vector2(4008, 2456)
 
 [connection signal="pressed" from="GuiMenu/VBoxContainer/Host" to="." method="_on_host_pressed"]
 [connection signal="pressed" from="GuiMenu/VBoxContainer/Join" to="." method="_on_join_pressed"]

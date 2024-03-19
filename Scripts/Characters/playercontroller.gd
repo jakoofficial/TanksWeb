@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 signal player_entered
 signal set_player_color
+signal playerHit
 
 @export var playerId: int = 1
 @export var playerSpriteId: int = 1
@@ -53,12 +54,15 @@ func _physics_process(delta):
 	if is_multiplayer_authority():
 		if canControl:
 			characterInput(delta)
+	position.x = clamp(position.x, 0+16, 4008-16)
+	position.y = clamp(position.y, 0+16, 2456-16)
 	move_and_slide()
 
-func hit():
-	if not isHit:
-		print(str("Hit"+name))
-		isHit = true
+func hit(bullet, target):
+	isHit = true
+	#emit_signal("playerHit", bullet, target)
+	get_tree().current_scene.onPlayerHit(bullet, target)
+	
 
 func shoot():
 	var cannon = get_node("Cannon")
@@ -88,6 +92,8 @@ func spawnBullet(pos:Vector2, forward:Transform2D):
 	var main = get_tree().current_scene
 	var bullet = bulletPre.instantiate()
 	var bulletSpr = bullet.get_child(0)
+	bullet.set_multiplayer_authority(self.name.to_int())
+	bullet.connect("hitPlayer", hit)
 	bulletSpr.texture = playerSprites[playerSpriteId-1][1]
 	main.add_child(bullet)
 	bullet.transform = forward

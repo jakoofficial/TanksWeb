@@ -32,7 +32,7 @@ properties/4/replication_mode = 1
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_68gvd")
-speed = 250.0
+speed = 500.0
 bulletTimer = 0.5
 playerSprites = [[ExtResource("2_mjqcj"), ExtResource("3_2wh57")], [ExtResource("4_u3ily"), ExtResource("5_nnatv")], [ExtResource("6_w0e43"), ExtResource("7_6sbnc")], [ExtResource("8_kwcgj"), ExtResource("9_2w4rh")]]
 metadata/_edit_group_ = true
@@ -76,5 +76,7 @@ position = Vector2(8, 31)
 enabled = false
 limit_left = 0
 limit_top = 0
+limit_right = 4008
+limit_bottom = 2456
 position_smoothing_enabled = true
-position_smoothing_speed = 2.0
+position_smoothing_speed = 8.0

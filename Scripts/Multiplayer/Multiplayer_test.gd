@@ -9,6 +9,7 @@ var peer = ENetMultiplayerPeer.new()
 @onready var tankChoiceMenu = $"GuiMenu/TankChoice"
 @onready var ipArea = $"GuiMenu/VBoxContainer/IPAddress"
 @onready var nameBox = $"GuiMenu/VBoxContainer/NameBox"
+@onready var hud = $"CanvasLayer/Hud"
 
 var playerColorId: int = 0
 #
@@ -31,6 +32,8 @@ func _add_player(id = 1):
 	player.name = str(id)
 	player.player_entered.connect(set_player_name)
 	player.playerSpriteId = playerColorId
+	player.connect("playerHit", onPlayerHit)
+	#hud.Scores.push
 	if not is_multiplayer_authority():
 		print("Player %s connected and is %s" % [id, playerColorId])
 		
@@ -40,6 +43,10 @@ func _add_player(id = 1):
 	player.set_spawn.rpc(spawnArea.global_position)
 	find_child("Spawns").call_deferred("add_child", player)
 	
+func onPlayerHit(bullet, target):
+	if bullet.is_multiplayer_authority():
+		$CanvasLayer/Hud.score = $CanvasLayer/Hud.score + 1
+		print("hello Points")
 
 func set_player_name(player):
 	player.playerName = nameBox.text
@@ -59,10 +66,3 @@ func _on_join_pressed():
 		multiplayer.multiplayer_peer = peer
 		connectMenu.visible = false
 		tankChoiceMenu.visible = false
-
-#func _on_multiplayer_spawner_spawned(node: Node):
-	##node.changeColor.rpc
-	##if node.get_multiplayer_authority() == multiplayer.get_unique_id():
-	#if node.is_multiplayer_authority():
-		#print(node.get_multiplayer_authority())
-		#node.changeColor.rpc(multiplayer.get_unique_id(), playerColorId)
