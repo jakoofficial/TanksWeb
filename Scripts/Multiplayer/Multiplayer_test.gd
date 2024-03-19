@@ -18,6 +18,10 @@ func _ready():
 	$"GuiMenu/TankChoice/HBoxContainer/Green".connect("chooseColor", SetPlayerColor)
 	$"GuiMenu/TankChoice/HBoxContainer/Red".connect("chooseColor", SetPlayerColor)
 	$"GuiMenu/TankChoice/HBoxContainer/Blue".connect("chooseColor", SetPlayerColor)
+	
+	if DisplayServer.get_name() == "headless":
+		print_debug("Start Headless")
+		_on_server_btn_pressed()
 
 func _on_host_pressed():
 	peer.create_server(PORT)
