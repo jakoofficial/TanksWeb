@@ -9,7 +9,7 @@ height = 18.0
 
 [node name="Bullet" type="Area2D"]
 script = ExtResource("1_3rubm")
-spd = 30
+spd = 60
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

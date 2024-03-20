@@ -1,7 +1,8 @@
 extends Node2D
 
-const PORT = 8080
-var peer = ENetMultiplayerPeer.new()
+const PORT = 10001
+
+var connection_error = "";
 @export var playArea: PackedScene
 @export var player_scene: PackedScene
 @onready var menu = $"GuiMenu"
@@ -20,23 +21,44 @@ func _ready():
 	$"GuiMenu/TankChoice/HBoxContainer/Blue".connect("chooseColor", SetPlayerColor)
 	
 	if DisplayServer.get_name() == "headless":
-		print_debug("Start Headless")
+		print("Start Headless")
 		_on_server_btn_pressed()
 
 func _on_host_pressed():
-	peer.create_server(PORT)
+	var peer = create_peer(false, true)
+	#peer.create_server(PORT)
 	multiplayer.multiplayer_peer = peer
 	multiplayer.peer_connected.connect(_add_player)
+	multiplayer.peer_disconnected.connect(_remove_player)
 	_add_player()
 	connectMenu.visible = false
 	tankChoiceMenu.visible = false
 
 func _on_server_btn_pressed():
-	peer.create_server(PORT)
+	var peer = create_peer(true, true)
+	#peer.create_server(PORT)
+	
 	multiplayer.multiplayer_peer = peer
 	multiplayer.peer_connected.connect(_add_player)
 	connectMenu.visible = false
 	tankChoiceMenu.visible = false
+func _on_join_pressed():
+	#var error = peer.create_client(ipArea.text, PORT)
+	#var error = peer.create_client("localhost", PORT)
+	#var error = peer.create_client(ipArea.text)
+	var peer = null
+	if ipArea.text == "":
+		peer = create_peer(false, false, "localhost")
+	else:
+		peer = create_peer(true, false, ipArea.text)
+		
+	if connection_error:
+		print("Could not create network: %s" % connection_error)
+	else:
+		multiplayer.multiplayer_peer = peer
+		multiplayer.peer_disconnected.connect(_remove_player)
+		connectMenu.visible = false
+		tankChoiceMenu.visible = false
 	
 func _add_player(id = 1):
 	var player = player_scene.instantiate()
@@ -45,7 +67,7 @@ func _add_player(id = 1):
 	player.playerSpriteId = playerColorId
 	player.connect("playerHit", onPlayerHit)
 	#hud.Scores.push
-	if not is_multiplayer_authority():
+	if is_multiplayer_authority():
 		print("Player %s connected and is %s" % [id, playerColorId])
 		
 	var spawnArea = find_child("Spawns").get_child(0)
@@ -53,6 +75,25 @@ func _add_player(id = 1):
 	player.spawnPos = spawnArea.global_position
 	player.set_spawn.rpc(spawnArea.global_position)
 	find_child("Spawns").call_deferred("add_child", player)
+
+func create_peer(websocket: bool, isServer: bool, url: String = "") -> MultiplayerPeer:
+	var peer: MultiplayerPeer = null
+	if websocket:
+		peer = WebSocketMultiplayerPeer.new()
+	else:
+		print("Creating a LAN client")
+		peer = ENetMultiplayerPeer.new()
+	
+	if isServer:
+		connection_error = peer.create_server(PORT)
+	elif websocket:
+		connection_error = peer.create_client(url)
+	else:
+		connection_error = peer.create_client(url, PORT)
+		print("ERror: %s" %connection_error)
+		
+	
+	return peer
 
 func setRespawn(player):
 	var spawnArea = find_child("Spawns").get_child(0)
@@ -79,13 +120,9 @@ func SetPlayerColor(ColorId):
 			i.button_pressed = false
 	playerColorId = ColorId
 
-func _on_join_pressed():
-	var error = peer.create_client(ipArea.text, PORT)
-	#var error = peer.create_client("localhost", PORT)
-	if error:
-		print("dis")
-	else:
-		multiplayer.multiplayer_peer = peer
-		connectMenu.visible = false
-		tankChoiceMenu.visible = false
 
+func _remove_player(id):
+	#var node = get_tree().current_scene.find_child(str(id))
+	var node = get_node("Spawns/"+str(id))
+	if node != null:
+		node.queue_free()
