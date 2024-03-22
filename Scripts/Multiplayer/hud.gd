@@ -1,11 +1,12 @@
 extends Control
 
-@export var scores = []
-
 var score: int = 0
+var playersOnline: int = 0
 
 func _ready():
 	$Score.text = ""
+	$PlayerCounter.text = "Players: "
 
 func _process(delta):
 	$Score.text = "Score: %s" % score
+	$PlayerCounter.text = "Players: %s" %playersOnline

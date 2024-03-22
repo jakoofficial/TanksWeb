@@ -75,6 +75,7 @@ func _add_player(id = 1):
 	player.spawnPos = spawnArea.global_position
 	player.set_spawn.rpc(spawnArea.global_position)
 	find_child("Spawns").call_deferred("add_child", player)
+	$hud.playersOnline += 1
 
 func create_peer(websocket: bool, isServer: bool, url: String = "") -> MultiplayerPeer:
 	var peer: MultiplayerPeer = null
@@ -120,9 +121,14 @@ func SetPlayerColor(ColorId):
 			i.button_pressed = false
 	playerColorId = ColorId
 
-
 func _remove_player(id):
 	#var node = get_tree().current_scene.find_child(str(id))
 	var node = get_node("Spawns/"+str(id))
 	if node != null:
 		node.queue_free()
+
+func _on_timer_timeout():
+	var tanks = get_tree().get_nodes_in_group("Player")
+	for t in tanks:
+		if not t.keepAlive.rpc_id(t.name.to_int()):
+			_remove_player(t.name)

@@ -124,3 +124,7 @@ func spawnBullet(pos:Vector2, forward:Transform2D):
 	muzzleflash.visible = true
 	await get_tree().create_timer(0.1).timeout
 	muzzleflash.visible = false
+
+@rpc()
+func _keepAlive() -> bool:
+	return true

@@ -142,6 +142,8 @@ texture = ExtResource("12_55dh1")
 [node name="Node2D2" type="Node2D" parent="."]
 position = Vector2(4008, 2456)
 
+[node name="Timer" type="Timer" parent="."]
+
 [connection signal="pressed" from="GuiMenu/VBoxContainer/Host" to="." method="_on_host_pressed"]
 [connection signal="pressed" from="GuiMenu/VBoxContainer/Join" to="." method="_on_join_pressed"]
 [connection signal="pressed" from="GuiMenu/VBoxContainer/ServerBtn" to="." method="_on_server_btn_pressed"]
@@ -149,3 +151,4 @@ position = Vector2(4008, 2456)
 [connection signal="pressed" from="GuiMenu/TankChoice/HBoxContainer/Green" to="GuiMenu/TankChoice/HBoxContainer/Green" method="_on_pressed"]
 [connection signal="pressed" from="GuiMenu/TankChoice/HBoxContainer/Red" to="GuiMenu/TankChoice/HBoxContainer/Red" method="_on_pressed"]
 [connection signal="pressed" from="GuiMenu/TankChoice/HBoxContainer/Blue" to="GuiMenu/TankChoice/HBoxContainer/Blue" method="_on_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
