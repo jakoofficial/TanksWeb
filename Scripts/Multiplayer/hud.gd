@@ -9,4 +9,5 @@ func _ready():
 
 func _process(delta):
 	$Score.text = "Score: %s" % score
-	$PlayerCounter.text = "Players: %s" %playersOnline
+	var counts = get_tree().get_nodes_in_group("Player").size()
+	$PlayerCounter.text = "Players: %s" %counts

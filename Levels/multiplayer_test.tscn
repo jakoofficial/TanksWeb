@@ -25,6 +25,7 @@ point_count = 51
 
 [node name="Multiplayer_test" type="Node2D"]
 script = ExtResource("1_0mpu4")
+version = "1.1"
 playArea = ExtResource("2_1658n")
 player_scene = ExtResource("3_jv6xk")
 
@@ -45,22 +46,25 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -150.0
-offset_top = -95.5
+offset_top = -88.0
 offset_right = 150.0
-offset_bottom = 197.5
+offset_bottom = 232.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(150, 0)
 
-[node name="NameBox" type="TextEdit" parent="GuiMenu/VBoxContainer" groups=["test"]]
+[node name="NameBox" type="LineEdit" parent="GuiMenu/VBoxContainer" groups=["test"]]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
+theme = ExtResource("4_gjn74")
 placeholder_text = "Name"
+max_length = 50
 
-[node name="IPAddress" type="TextEdit" parent="GuiMenu/VBoxContainer"]
+[node name="IPAddress" type="LineEdit" parent="GuiMenu/VBoxContainer"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
-placeholder_text = "IP Goes here"
+theme = ExtResource("4_gjn74")
+placeholder_text = "Ip address"
 
 [node name="Host" type="Button" parent="GuiMenu/VBoxContainer"]
 layout_mode = 2
@@ -80,6 +84,11 @@ text = "Server"
 [node name="Label" type="Label" parent="GuiMenu/VBoxContainer"]
 layout_mode = 2
 text = "Made by: Jacob Ø. Andersen"
+horizontal_alignment = 1
+
+[node name="VersionNumber" type="Label" parent="GuiMenu/VBoxContainer"]
+layout_mode = 2
+text = "Version: 1.1"
 horizontal_alignment = 1
 
 [node name="TankChoice" type="VBoxContainer" parent="GuiMenu"]

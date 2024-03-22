@@ -3,6 +3,7 @@ extends Node2D
 const PORT = 10001
 
 var connection_error = "";
+@export var version: String = ""
 @export var playArea: PackedScene
 @export var player_scene: PackedScene
 @onready var menu = $"GuiMenu"
@@ -19,6 +20,9 @@ func _ready():
 	$"GuiMenu/TankChoice/HBoxContainer/Green".connect("chooseColor", SetPlayerColor)
 	$"GuiMenu/TankChoice/HBoxContainer/Red".connect("chooseColor", SetPlayerColor)
 	$"GuiMenu/TankChoice/HBoxContainer/Blue".connect("chooseColor", SetPlayerColor)
+	
+	ipArea.text = "wss://tanks-server.hoxer.net"
+	$GuiMenu/VBoxContainer/VersionNumber.text = "Version: %s" %version
 	
 	if DisplayServer.get_name() == "headless":
 		print("Start Headless")
@@ -75,7 +79,6 @@ func _add_player(id = 1):
 	player.spawnPos = spawnArea.global_position
 	player.set_spawn.rpc(spawnArea.global_position)
 	find_child("Spawns").call_deferred("add_child", player)
-	$hud.playersOnline += 1
 
 func create_peer(websocket: bool, isServer: bool, url: String = "") -> MultiplayerPeer:
 	var peer: MultiplayerPeer = null

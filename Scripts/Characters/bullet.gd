@@ -11,21 +11,19 @@ func _physics_process(delta):
 func _on_body_entered(body:Node2D):
 	if body.is_in_group("Player"):
 		explode()
-		#body.hit()
 		emit_signal("hitPlayer", self, body)
-		#body.queue_free()
-		queue_free()
 	if body.is_in_group("Statics"):
 		explode()
-		queue_free()
 
 func explode():
 	var explosion = explosionPre.instantiate()
 	get_tree().current_scene.add_child(explosion)
 	explosion.transform = self.global_transform
 	print("hel")
-
-
+	queue_free()
 func _on_visible_on_screen_notifier_2d_screen_exited():
 	#explode()
 	queue_free()
+
+func _on_timer_timeout():
+	explode()
