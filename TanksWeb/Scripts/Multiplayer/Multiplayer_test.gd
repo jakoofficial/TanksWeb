@@ -52,7 +52,7 @@ func SetPlayerColor(ColorId):
 
 func _on_join_pressed():
 	# var error = peer.create_client(ipArea.text, PORT)
-	var error = peer.create_client("localhost", PORT)
+	var error = peer.create_client("tanksserver.hoxer.net", PORT)
 	if error:
 		print("dis")
 	else:
