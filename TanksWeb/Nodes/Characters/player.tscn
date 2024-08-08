@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dprl3qsplg44y"]
+[gd_scene load_steps=13 format=3 uid="uid://dprl3qsplg44y"]
 
 [ext_resource type="Script" path="res://Scripts/Characters/playercontroller.gd" id="1_68gvd"]
 [ext_resource type="Texture2D" uid="uid://fkk1opurmlmg" path="res://Assets/PNG/Default size/tank_dark.png" id="2_mjqcj"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://cuj0y8rq10fka" path="res://Assets/PNG/Default size/bulletRed3_outline.png" id="7_6sbnc"]
 [ext_resource type="Texture2D" uid="uid://7rnne1dqkkoq" path="res://Assets/PNG/Default size/tank_blue.png" id="8_kwcgj"]
 [ext_resource type="Texture2D" uid="uid://dpuaunk6mkrsi" path="res://Assets/PNG/Default size/bulletBlue3_outline.png" id="9_2w4rh"]
+[ext_resource type="Texture2D" uid="uid://h1gfqlegxsq5" path="res://Assets/PNG/MuzzleFlash.png" id="10_gdxvk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5ebyq"]
 size = Vector2(48, 56)
@@ -41,6 +42,11 @@ metadata/_edit_group_ = true
 rotation = -3.14159
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("4_u3ily")
+
+[node name="Muzzleflash" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, -49)
+texture = ExtResource("10_gdxvk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 4)
@@ -76,5 +82,10 @@ position = Vector2(8, 31)
 enabled = false
 limit_left = 0
 limit_top = 0
+limit_right = 4008
+limit_bottom = 2456
 position_smoothing_enabled = true
-position_smoothing_speed = 2.0
+position_smoothing_speed = 8.0
+
+[node name="TrackSpawner" type="Node2D" parent="."]
+position = Vector2(0, 28)

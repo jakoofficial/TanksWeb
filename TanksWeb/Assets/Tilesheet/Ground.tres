@@ -6,14 +6,6 @@
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_252m1"]
 texture = ExtResource("1_gm7mf")
 texture_region_size = Vector2i(56, 56)
-0:0/0 = 0
-0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-0:0/0/physics_layer_0/angular_velocity = 0.0
-0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-27.4286, -27.4286, 27.4286, -27.4286, 27.4286, 27.4286, -27.4286, 27.4286)
-1:0/0 = 0
-1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-1:0/0/physics_layer_0/angular_velocity = 0.0
-1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-27.4286, -27.4286, 27.4286, -27.4286, 27.4286, 27.4286, -27.4286, 27.4286)
 2:0/0 = 0
 2:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 2:0/0/physics_layer_0/angular_velocity = 0.0
@@ -155,6 +147,9 @@ texture_region_size = Vector2i(80, 80)
 10:2/0 = 0
 10:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 10:2/0/physics_layer_0/angular_velocity = 0.0
+10:3/0 = 0
+10:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+10:3/0/physics_layer_0/angular_velocity = 0.0
 
 [resource]
 tile_size = Vector2i(80, 80)
